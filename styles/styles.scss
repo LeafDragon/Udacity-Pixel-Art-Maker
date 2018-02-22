@@ -1,0 +1,240 @@
+$namespace: upam;
+
+/**
+ * @author Frank Dip
+ *
+ * @version 2.0
+ *
+ * Using Sass to clean up and expand on NS-B--E--M
+ */
+
+/**
+ * reticle
+ * Creates an animation of inset box-shadow and outline.
+ * Makes it easier to spot things.
+ */
+@keyframes reticle {
+  0% {
+    box-shadow: inset 0px 0px 2px 2px rgba(240,12,12,1);
+    outline: 2px solid rgba(255,255,0,1);
+  }
+
+  50% {
+    box-shadow: inset 0px 0px 2px 3px rgba(0,255,0,1);
+    outline: 3px solid rgba(0,0,255,1);
+  }
+
+  100% {
+    box-shadow: inset 0px 0px 2px 2px rgba(255,255,0,1);
+    outline: 2px solid rgba(240,12,12,1);
+  }
+}
+
+/////////////////////////////////////////////////
+/// Placeholer classes
+/////////////////////////////////////////////////
+
+/** %reticle */
+%reticle {
+  animation-name: reticle;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+%cursor---pointer {cursor: pointer;}
+
+%text--color--shadow {
+  color: #84FFFF;
+  text-shadow: 0px 0px 9px #0091EA;
+}
+
+%border--color--radius {
+  border: 1px solid #0091EA;
+  border-radius: 10px;
+}
+
+%main-nav-btn {
+  @extend %border--color--radius;
+  @extend %text--color--shadow;
+  padding: 10px;
+  background-color: #304FFE;
+  @extend %cursor---pointer;
+}
+
+body {
+  text-align: center;
+  font-family: 'VT323', monospace;
+  background: url("https://static.pexels.com/photos/326240/pexels-photo-326240.jpeg");
+  background-size: cover;
+}
+
+table,
+tr,
+td {
+  border: 1px solid #0091EA;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+tr {
+  height: 20px;
+}
+
+td {
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  user-select: none;
+  font-size: 0.9em;
+  @extend %cursor---pointer;
+  color: #304FFE;
+
+  &:hover {@extend %reticle;}
+}
+
+input[type=number] {width: 6em;}
+
+/********************************************//**
+ * Classes
+ ***********************************************/
+.#{$namespace}-label {
+  display: block;
+  @extend %cursor---pointer;
+}
+
+/********************************************//**
+ * Flexbox classes
+ ***********************************************/
+.#{$namespace}-flex-container {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+/********************************************//**
+ * BEM classes
+ ***********************************************/
+
+ // .#{$namespace}-header
+.#{$namespace}-header {
+  @extend %border--color--radius;
+  margin-bottom: 10px;
+
+  // .#{$namespace}-header--title
+  &--title {
+    font-size: 70px;
+    margin: 0.2em;
+    @extend %text--color--shadow;
+  }
+
+  // .#{$namespace}-header--nav
+  &--nav {
+    margin-bottom: 10px;
+
+    // .#{$namespace}-header--nav--btn
+    &--btn {
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #0288D1;
+      @extend %cursor---pointer;
+
+      &:focus {outline: none;}
+    }
+  }
+}
+
+// #{$namespace}-aside
+.#{$namespace}-aside {
+  @extend %border--color--radius;
+  width: 150px;
+  padding: 10px;
+
+  // .#{$namespace}-aside--nav
+  &--nav {
+
+    // .#{$namespace}-aside--nav--grid-size
+    &--grid-size {
+
+      // .#{$namespace}-aside--nav--grid-size--title
+      &--title {@extend %text--color--shadow;}
+
+      // .#{$namespace}-aside--nav--grid-size--number
+      &--number {
+        @extend %border--color--radius;
+        padding: 10px;
+        background-color: #84FFFF;
+
+        &:focus {outline: none;}
+
+        &:valid {background-color: #76FF03;}
+
+        &:invalid {background-color: #D50000;}
+      }
+
+      // .#{$namespace}-aside--nav--grid-size--btn
+      &--btn {
+        @extend %main-nav-btn;
+        margin-top: 10px;
+
+        &:focus {outline: none;}
+      }
+    }
+
+    // .#{$namespace}-aside--nav--color-picker
+    &--color-picker {
+
+      // .#{$namespace}-aside--nav--color-picker--title
+      &--title {@extend %text--color--shadow;}
+
+      // .#{$namespace}-aside--nav--color-picker--input
+      &--input {
+        @extend %cursor---pointer;
+        @extend %main-nav-btn;
+
+        &:focus {outline: none;}
+      }// .#{$namespace}-aside--nav--color-picker--input closer
+
+    }// .#{$namespace}-aside--nav--color-picker closer
+
+    // .#{$namespace}-aside--nav--tool
+    &--tool {
+      @extend %text--color--shadow;
+      font-size: 1.5em;
+      @extend %cursor---pointer;
+    }
+
+    // .#{$namespace}-aside--nav--emoji-picker
+    &--emoji-picker{
+      @extend %text--color--shadow;
+
+      // .#{$namespace}-aside--nav--emoji-picker--title
+      &--title {}
+
+      // .#{$namespace}-aside--nav--emoji-picker--container
+      &--container {
+        text-align: right;
+        width: 80px;
+        margin: auto;
+        font-size: 1.5em;
+        transform: translate(-5px,0);
+      }// .#{$namespace}-aside--nav--emoji-picker--container closer
+
+    }// .#{$namespace}-aside--nav--emoji-picker closer
+
+  }// .#{$namespace}-aside--nav closer
+
+}// .#{$namespace}-aside closer
+
+// .#{$namespace}-canvas
+.#{$namespace}-canvas {
+  margin: 0 10px;
+  padding: 5px 10px 10px 10px;
+  @extend %border--color--radius;
+  width: 100%;
+
+  // .#{$namespace}-canvas--title
+  &--title {@extend %text--color--shadow;}
+}// .#{$namespace}-canvas closer

@@ -4,7 +4,7 @@
  * TODO: Switch from forEach() to jquery each() method. jQuery is faster.
  * TODO: Finishing building the help model object
  * TODO: Clean up the help button with jQuery each() method
-  * @version 2.0
+ * @version 2.0
  */
 
 /********************************************//**

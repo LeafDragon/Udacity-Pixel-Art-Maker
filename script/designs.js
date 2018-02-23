@@ -1,12 +1,10 @@
 /**
  * @author Frank Dip
- *
- * @version 2.0
- *
  * Clearing out most of the vanilla JS.
- * Switch from forEach() to jquery each() method. jQuery is faster.
- * Finishing building the help model object
- * Clean up the help button with jQuery each() method
+ * TODO: Switch from forEach() to jquery each() method. jQuery is faster.
+ * TODO: Finishing building the help model object
+ * TODO: Clean up the help button with jQuery each() method
+  * @version 2.0
  */
 
 /********************************************//**

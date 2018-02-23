@@ -1,10 +1,12 @@
 /**
  * @author Frank Dip
- * Clearing out most of the vanilla JS.
+ * @desc Clearing out most of the vanilla JS.
+ * Cleaned up some comments unnecessary code
  * TODO: Switch from forEach() to jquery each() method. jQuery is faster.
  * TODO: Finishing building the help model object
  * TODO: Clean up the help button with jQuery each() method
- * @version 2.0
+ * TODO: Convert the art to art2 encoding in the pixel object
+ * @version 2.1
  */
 
 /********************************************//**
@@ -1186,9 +1188,8 @@ const pixel = [
  ***********************************************/
 
 /**
- *Converts rgb to hex
- *
- *@param {rgb} color_value
+ * @desc Converts rgb to hex
+ * @param {string} color_value Takes a string in rgb format
  */
 function rgba2hex( color_value ) {
 	if ( ! color_value ) return false;
@@ -1203,9 +1204,8 @@ function rgba2hex( color_value ) {
 }
 
 /**
- *Change hex to rgb
- *
- *@param {hex} hex
+ * @desc Change hex to rgb
+ * @param {string} hex Takes a string in hex format
  */
 function hexToRgb(h) {
   const r = parseInt((cutHex(h)).substring(0,2),16),
@@ -1221,7 +1221,7 @@ function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
   ***********************************************/
 
 /**
- * jQurey Ready Function shorthand.
+ * @desc jQurey Ready Function shorthand.
  * Calls the makeGrid on ready.
  * Fills in art pattern from the model
  */
@@ -1231,8 +1231,8 @@ $(_ => {
 });
 
 /**
- *Deletes the table's children elements.
- *Uses the confirm popup to ask for deletion.
+ * @desc Deletes the table's children elements.
+ * Uses the confirm popup to ask for deletion.
  */
 $headerNavDelete.click(_ => {
   let con = confirm("Do you want to delete the table elements?");
@@ -1261,10 +1261,10 @@ $headerNavHelp.click(_ => {
 });
 
 /**
- *Listens for a submit on the form.
- *Calls the makeGrid
+ * @desc Listens for a submit on the form.
+ * Calls the makeGrid
  *
- *@param {event} evt The evt is to prevent the table going back to default.
+ * @param {event} evt The evt is to prevent the table going back to default.
  */
 $formSizePicker.on("submit", evt => {
   evt.preventDefault();
@@ -1272,18 +1272,20 @@ $formSizePicker.on("submit", evt => {
 });
 
 /**
- * Listens for the change on the color picker to display rgb and hex.
+ * @desc Listens for the change on the color picker to display rgb and hex.
  */
 $colorPicker.on("change", _ => {
   displayColorRGBHex($colorPicker.val(), $colorPicker.val());
 });
 
 /**
- * Allows you to draw on the grid.
+ * @desc Allows you to draw on the grid.
  * You click and hold to draw a line.
  * Updates model with color.
  *
- *@this {td} Selects the td element
+ * @param {event} mousedown Listens for the mouse down event
+ * @param {evetn} mouseover Listens for the mouse over event
+ * @this {td} Selects the td element
  */
 $pixelCanvas.on("mousedown mouseover", "td", e => {
   if (e.which === 1) {
@@ -1304,23 +1306,11 @@ $pixelCanvas.on("mousedown mouseover", "td", e => {
     } else if ($("input[name='upam-emoji']:checked").val() === "erase") {
       $(e.target).text("");
     }
-
-    /*
-    if ($emojiPickerErase.is(":checked") === true) {
-      $(e.target).text("");
-    } else if ($emojiPickerSmile.is(":checked") === true) {
-      $(e.target).text($emojiPickerSmile.val());
-    } else if ($emojiPickerGrin.is(":checked") === true) {
-      $(e.target).text($emojiPickerGrin.val());
-    } else if ($emojiPickerTears.is(":checked") === true) {
-      $(e.target).text($emojiPickerTears.val());
-    }
-    */
   }
 });
 
 /**
- * Double click to erase
+ * @desc Double click to erase
  */
 $pixelCanvas.on("dblclick", "td", e => {
   $(e.target).removeAttr("style");
@@ -1332,8 +1322,7 @@ $pixelCanvas.on("dblclick", "td", e => {
   ***********************************************/
 
 /**
- * Makes the nav buttons at the top in the header
- *
+ * @desc Makes the nav buttons at the top in the header
  * @param {object} obj Takes an object to build the button
  */
 function makeNavBtn(obj) {
@@ -1353,11 +1342,9 @@ function makeNavBtn(obj) {
 }
 
 /**
- * Displays the color selected as rgb and hex
- *
- * @param {rgb} rgb
- *
- * @param {hex} hex
+ * @desc Displays the color selected as rgb and hex
+ * @param {string} rgb Takes a string in rgb format
+ * @param {string} hex Takes a string in hex format
  */
 function displayColorRGBHex(rgb, hex) {
   $colorDisplayRGB.text(rgb);
@@ -1365,19 +1352,21 @@ function displayColorRGBHex(rgb, hex) {
 }
 
 /**
- *Clears the table of children elements.
+ * @desc Clears the table of children elements.
+ * Changed from children().remove() to empty() method
  */
 function clearTableChildren() {
-  $pixelCanvas.children().remove();
+  $pixelCanvas.empty();
 }
 
 /**
- *Creates the grid from the submitted values.
- *Uses a tbody element to store newly created rows and cols.
- *Clears the previous table's children elements with cleanTable() function.
- *Appends the tbody element to table#js-pixel-canvas.
+ * @desc Creates the grid from the submitted values.
+ * Uses a tbody element to store newly created rows and cols.
+ * Clears the table with clearTableChildren() function.
+ * Appends the tbody element to table#js-pixel-canvas.
  *
- *@param {integer} width, height Sets the width and height of the table
+ * @param {number} width Sets the width of the table
+ * @param {number} height Sets the height of the table
  */
 function setTable(width, height) {
   const tbody = document.createElement("tbody");
@@ -1395,13 +1384,13 @@ function setTable(width, height) {
 }
 
 /**
- *Changes the values of the width and height input form.
- *Changes the selected emoji.
- *Calls the makeGrid function and submits the object's store values
- *Uses the object's stored values to color in the pixels.
+ * @desc Changes the values of the width and height input form.
+ * Changes the selected emoji.
+ * Calls the makeGrid function and submits the object's store values
+ * Uses the object's stored values to color in the pixels.
  *
- *@param {object} ele The object being submitted in.
- *It contains the pixel position and colors.
+ * @param {object} ele The object being submitted in.
+ * It contains the pixel position and colors.
  */
 function drawPixel(ele) {
   const $idEmoji = $(`#${ele.idEmoji}`);

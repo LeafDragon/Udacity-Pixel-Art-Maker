@@ -1,0 +1,183 @@
+//output: index.html
+
+- var namespace = "upam"
+
+//- Converted HTML to PUG
+//- Refactored classes to use variable chain
+//- TODO: Convert radio buttons to select drop down list
+
+- var author = "Frank Dip"
+- var version = "Version 3.0"
+- var title = "Udacity Pixel Art Maker!"
+- var description = "Udacity Google scholarship third project. Pixel Art Maker!. " + version + "."
+
+doctype html
+html(lang="en-US")
+  head
+    meta(charset="utf-8")
+    title #{title}
+    meta(name="description", content=description)
+    meta(name="author", content="Frank Dip")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=VT323")
+    link(rel="stylesheet", href="styles/styles.min.css")
+  body
+    // Header 
+    - var classHeader = namespace + "-header"
+    header(class=classHeader)
+      h1(class=classHeader + "--title") Lab: Pixel Art Maker
+      - var classHeaderNav = classHeader + "--nav"
+      nav(id="js-" + classHeaderNav, class=classHeaderNav)
+        - var classHeaderNavBtn = classHeaderNav + "--btn"
+        button(id="js-" + classHeaderNavBtn + "---delete", class=classHeaderNavBtn) Delete
+        button(id="js-" + classHeaderNavBtn + "---help", class=classHeaderNavBtn) Help?
+    
+    div(class=namespace + "-flex-container")
+      
+      // Aside for the nav 
+      - var classAside = namespace + "-aside"
+      aside(class=classAside)
+        
+        // Aside nav 
+        - var classAsideNav = classAside + "--nav"
+        nav(class=classAsideNav)
+        - var classLabel = namespace + "-label"
+          
+          // Aside nav grid size section form 
+          - var classAsideNavGridSize = classAsideNav + "--grid-size"
+          section(class=classAsideNavGridSize)
+            h2(class=classAsideNavGridSize + "--title") Choose Grid Size
+            form(id="js-" + classAsideNavGridSize + "--size-picker")
+              - var classAsideNavGridSizeNumber = classAsideNavGridSize + "--number"
+              - var classAsideNavGridSizeInput = classAsideNavGridSize + "--input" 
+              label(class="label") Grid Height:
+                br
+                input(id="js-" + classAsideNavGridSizeInput + "---height"
+                  class=classAsideNavGridSizeNumber
+                  type="number"
+                  name="height"
+                  min="1"
+                  max="40"
+                  step="1"
+                  value="15"
+                  required
+                )
+              label(class="label") Grid Height:
+                br
+                input(id="js-" + classAsideNavGridSizeInput + "---width"
+                  class=classAsideNavGridSizeNumber
+                  type="number"
+                  name="height"
+                  min="1"
+                  max="48"
+                  step="1"
+                  value="15"
+                  required
+                )
+              input(class=classAsideNavGridSize + "--btn"
+                type="submit"
+                value="Submit/Blank"
+              )
+          
+          hr
+          
+          // Aside nav color picker 
+          - var classAsideNavColorPicker = classAsideNav + "--color-picker"
+          section(class=classAsideNavColorPicker)
+            - var classAsideNavColorPickerInput = classAsideNavColorPicker + "--input"
+            - var classAsideNavColorPickerDisplay = classAsideNavColorPicker + "--display"
+            h2(class=classAsideNavColorPicker + "--title") Color
+            input(id="js-" + classAsideNavColorPickerInput + "---color"
+              class=classAsideNavColorPickerInput
+              type="color"
+              value="#FFFFFF"
+            )
+            p(id="js-" + classAsideNavColorPickerDisplay + "---rgb"
+              class=classAsideNavColorPickerDisplay
+            )
+            p(id="js-" + classAsideNavColorPickerDisplay + "---hex"
+              class=classAsideNavColorPickerDisplay
+            )
+          
+          hr
+          
+          // Aside nav tool 
+          - var classAsideNavTool = classAsideNav + "--tool"
+          section(class=classAsideNavTool)
+            -var classAsideNavToolInput = classAsideNavTool + "--input"
+            label(class=classLabel) Paint
+              input(id="js-" + classAsideNavToolInput + "---paint"
+                type="radio"
+                name="tool"
+                checked
+              )
+            label(class=classLabel) Dipper
+              input(id="js-" + classAsideNavToolInput + "---dipper"
+                type="radio"
+                name="tool"
+              )
+            label(class=classLabel) Erase
+              input(id="js-" + classAsideNavToolInput + "---erase"
+                type="radio"
+                name="tool"
+              )
+            label(class=classLabel) None
+              input(id="js-" + classAsideNavToolInput + "---none"
+                type="radio"
+                name="tool"
+              )
+          
+          hr
+          
+          // Aside nav emoji picker 
+          - var classAsideNavEmojiPicker = classAsideNav + "--emoji-picker"
+          section(class=classAsideNavEmojiPicker)
+            - var classAsideNavEmojiPickerInput = classAsideNavEmojiPicker + "--input"
+            - var nameEmoji = namespace + "-emoji"
+            h2(class=classAsideNavEmojiPicker + "--title") Emoji
+            div(class=classAsideNavEmojiPicker + "--container")
+              label(class=classLabel) None
+                input(id="js-" + classAsideNavEmojiPickerInput + "---none"
+                  type="radio"
+                  name=nameEmoji
+                  value="none"
+                  checked
+                )
+              label(class=classLabel) Erase
+                input(id="js-" + classAsideNavEmojiPickerInput + "---erase"
+                  type="radio"
+                  name=nameEmoji
+                  value="erase"
+                )
+              label(class=classLabel) 😊
+                input(id="js-" + classAsideNavEmojiPickerInput + "---smile"
+                  type="radio"
+                  name=nameEmoji
+                  value="😊"
+                )
+              label(class=classLabel) 😁
+                input(id="js-" + classAsideNavEmojiPickerInput + "---grin"
+                  type="radio"
+                  name=nameEmoji
+                  value="😁"
+                )
+              label(class=classLabel) 😂
+                input(id="js-" + classAsideNavEmojiPickerInput + "---tears"
+                  type="radio"
+                  name=nameEmoji
+                  value="😂"
+                )
+      
+      // Main canvas for drawing 
+      - var classCanvas = namespace + "-canvas"
+      main(class=classCanvas)
+        h2(class=classCanvas + "--title") Design Canvas
+        table(id="js-" + classCanvas + "--table")
+    
+    script(
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    )
+    
+    script(src="script/designs.js")

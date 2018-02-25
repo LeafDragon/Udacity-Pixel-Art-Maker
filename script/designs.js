@@ -1,41 +1,46 @@
+let namespace = "upam"
+
 /**
  * @author Frank Dip
- * @desc Clearing out most of the vanilla JS.
+ * @desc Draws the table and makes the navigation work
  * Cleaned up some comments unnecessary code
+ * Renamed a lot of IDs to BEM.
+ * Removed a of repeated code. Using namespace
  * TODO: Switch from forEach() to jquery each() method. jQuery is faster.
  * TODO: Finishing building the help model object
  * TODO: Clean up the help button with jQuery each() method
  * TODO: Convert the art to art2 encoding in the pixel object
- * @version 2.1
+ * @version 2.2
  */
 
 /********************************************//**
  *   DOM selectors using jQuery
  ***********************************************/
-const $headerNav = $("#js-upam--header--nav");
-const $headerNavDelete = $("#js-upam-header--nav--btn---delete");
-const $headerNavHelp = $("#js-upam-header--nav--btn---help");
-const $formSizePicker = $("#js-size-picker");
-const $inputWidth = $("#js-input-width");
-const $inputHeight = $("#js-input-height");
+const $headerNav = $(`#js-${namespace}-header--nav`);
+const $headerNavDelete = $(`#js-${namespace}-header--nav--btn---delete`);
+const $headerNavHelp = $(`#js-${namespace}-header--nav--btn---help`);
+const $formSizePicker = $(`#js-${namespace}-aside--nav--grid-size--size-picker`);
+const $inputWidth = $(`#js-${namespace}-aside--nav--grid-size--input---width`);
+const $inputHeight = $(`#js-${namespace}-aside--nav--grid-size--input---height`);
 
 // Color section
-const $colorPicker = $("#js-main-nav-color-picker-input");
-const $colorDisplayRGB = $("#js-main-nav-color-picker-rgb");
-const $colorDisplayHex = $("#js-main-nav-color-picker-hex");
+const $colorPicker = $(`#js-${namespace}-aside--nav--color-picker--input---color`);
+const $colorDisplayRGB = $(`#js-${namespace}-aside--nav--color-picker--display---rgb`);
+const $colorDisplayHex = $(`#js-${namespace}-aside--nav--color-picker--display---hex`);
 
 // Tool section
-const $toolPaint = $("#js-main-nav-tool-paint");
-const $toolDipper = $("#js-main-nav-tool-dipper");
-const $toolErase = $("#js-main-nav-tool-eraser");
+const $toolPaint = $(`#js-${namespace}-aside--nav--tool--input---paint`);
+const $toolDipper = $(`#js-${namespace}-aside--nav--tool--input---dipper`);
+const $toolErase = $(`#js-${namespace}-aside--nav--tool--input---erase`);
 
 // Emoji section
-const $emojiPickerErase = $("#js-main-nav-emoji-picker-erase");
-const $emojiPickerSmile = $("#js-main-nav-emoji-picker-smile");
-const $emojiPickerGrin = $("#js-main-nav-emoji-picker-grin");
-const $emojiPickerTears = $("#js-main-nav-emoji-picker-tears");
+const $emojiPickerNone = $(`#js-${namespace}-aside--nav--emoji-picker--input---none`);
+const $emojiPickerErase = $(`#js-${namespace}-aside--nav--emoji-picker--input---erase`);
+const $emojiPickerSmile = $(`#js-${namespace}-aside--nav--emoji-picker--input---smile`);
+const $emojiPickerGrin = $(`#js-${namespace}-aside--nav--emoji-picker--input---grin`);
+const $emojiPickerTears = $(`#js-${namespace}-aside--nav--emoji-picker--input---tears`);
 
-const $pixelCanvas = $("#js-upam-canvas--table");
+const $pixelCanvas = $(`#js-${namespace}-canvas--table`);
 
 /********************************************//**
  *  Model Code
@@ -50,7 +55,7 @@ const pixel = [
     name: "Plain",
     width: 15,
     height: 15,
-    idEmoji: "js-main-nav-emoji-picker-none",
+    idEmoji: $emojiPickerNone,
     color: {
       picker: "#000000",
       background: "#FFFFFF"
@@ -61,7 +66,7 @@ const pixel = [
     name: "ピカチュー",
     width: 28,
     height: 24,
-    idEmoji: "js-main-nav-emoji-picker-none",
+    idEmoji: $emojiPickerNone,
     color: {
       picker: "#FFEA00",
       background: "#FFEA00"
@@ -536,7 +541,7 @@ const pixel = [
     name: "Pokeball",
     width: 14,
     height: 14,
-    idEmoji: "js-main-nav-emoji-picker-none",
+    idEmoji: $emojiPickerNone,
     color: {
       picker: "#FF0000",
       background: "#FF0000"
@@ -662,7 +667,7 @@ const pixel = [
     text: "😊",
     width: 20,
     height: 20,
-    idEmoji: "js-main-nav-emoji-picker-smile",
+    idEmoji: $emojiPickerSmile,
     color: {
       picker: "#FFEA00",
       background: "#FFEA00"
@@ -814,11 +819,11 @@ const pixel = [
   },
   //Smiling Teeth Emoji
   {
-    name: "Smiling Teeth",
+    name: "Smiling Grin",
     text: "😁",
     width: 20,
     height: 20,
-    idEmoji: "js-main-nav-emoji-picker-grin",
+    idEmoji: $emojiPickerGrin,
     color: {
       picker: "#FFEA00",
       background: "#FFEA00"
@@ -1014,7 +1019,7 @@ const pixel = [
     text: "😂",
     width: 20,
     height: 20,
-    idEmoji: "js-main-nav-emoji-picker-tears",
+    idEmoji: $emojiPickerTears,
     color: {
       picker: "#FFEA00",
       background: "#FFEA00"
@@ -1240,6 +1245,10 @@ $headerNavDelete.click(_ => {
   clearTableChildren();
 });
 
+/**
+ * @desc Creates the help alert
+ * Need to move all the strings to the model object
+ */
 $headerNavHelp.click(_ => {
   let newLine = "\n\n";
   let helpDelete = "Click the delete button to delete the table's elements.";
@@ -1273,9 +1282,10 @@ $formSizePicker.on("submit", evt => {
 
 /**
  * @desc Listens for the change on the color picker to display rgb and hex.
+ * Correct error to display rgb
  */
 $colorPicker.on("change", _ => {
-  displayColorRGBHex($colorPicker.val(), $colorPicker.val());
+  displayColorRGBHex(hexToRgb($colorPicker.val()), $colorPicker.val());
 });
 
 /**
@@ -1284,8 +1294,7 @@ $colorPicker.on("change", _ => {
  * Updates model with color.
  *
  * @param {event} mousedown Listens for the mouse down event
- * @param {evetn} mouseover Listens for the mouse over event
- * @this {td} Selects the td element
+ * @param {event} mouseover Listens for the mouse over event
  */
 $pixelCanvas.on("mousedown mouseover", "td", e => {
   if (e.which === 1) {
@@ -1393,8 +1402,6 @@ function setTable(width, height) {
  * It contains the pixel position and colors.
  */
 function drawPixel(ele) {
-  const $idEmoji = $(`#${ele.idEmoji}`);
-
   $inputWidth.val(ele.width);
   $inputHeight.val(ele.height);
 
@@ -1402,7 +1409,7 @@ function drawPixel(ele) {
 
   $toolPaint.prop("checked", true);
 
-  $idEmoji.prop("checked", true);
+  ele.idEmoji.prop("checked", true);
 
   setTable(ele.width, ele.height);
 

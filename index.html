@@ -1,87 +1,95 @@
-<!--
-version 2.0
-Cleaned up most of the unnessary BEM classes.
-Need to refactor the IDs with better NS-BEM hyphen only
--->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-US">
-<head>
-  <meta charset="utf-8">
-  <title>Udacity Pixel Art Maker!</title>
-  <meta name="description" content="Udacity Google scholarship third project. Pixel Art Maker!">
-  <meta name="author" content="Frank Dip">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
-  <link rel="stylesheet" href="styles/styles.min.css">
-</head>
-<body>
-
-  <!-- Header -->
-  <header class="upam-header">
-    <h1 class="upam-header--title">Lab: Pixel Art Maker</h1>
-    <nav id="js-upam--header--nav" class="upam-header--nav">
-      <button id="js-upam-header--nav--btn---delete" class="upam-header--nav--btn" type="button">Delete</button>
-      <button id="js-upam-header--nav--btn---help" class="upam-header--nav--btn" type="button">Help?</button>
-    </nav>
-  </header>
-
-  <div class="upam-flex-container">
-
-    <!-- Aside for the nav -->
-    <aside class="upam-aside">
-      <nav class="upam-aside--nav">
-        <!-- Aside Nav grid size picker -->
+  <head>
+    <meta charset="utf-8">
+    <title>Udacity Pixel Art Maker!</title>
+    <meta name="description" content="Udacity Google scholarship third project. Pixel Art Maker!. Version 3.0.">
+    <meta name="author" content="Frank Dip">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+    <link rel="stylesheet" href="styles/styles.min.css">
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="upam-header">
+      <h1 class="upam-header--title">Lab: Pixel Art Maker</h1>
+      <nav id="js-upam-header--nav" class="upam-header--nav">
+        <button id="js-upam-header--nav--btn---delete" class="upam-header--nav--btn">Delete</button>
+        <button id="js-upam-header--nav--btn---help" class="upam-header--nav--btn">Help?</button>
+      </nav>
+    </header>
+    <div class="upam-flex-container">
+      <!-- Aside for the nav -->
+      <aside class="upam-aside">
+        <!-- Aside nav -->
+        <nav class="upam-aside--nav"></nav>
+        <!-- Aside nav grid size section form -->
         <section class="upam-aside--nav--grid-size">
           <h2 class="upam-aside--nav--grid-size--title">Choose Grid Size</h2>
-          <form id="js-size-picker">
-            <label class="label">Grid Height:<br><input id="js-input-height" class="upam-aside--nav--grid-size--number" type="number" name="height" min="1" max="40" step="1" value="15" required></label>
-            <label class="label">Grid Width:<br><input id="js-input-width" class="upam-aside--nav--grid-size--number" type="number" name="width" min="1" max="48" step="1" value="15" required></label>
-            <input id="js-btn-submit" class="upam-aside--nav--grid-size--btn" type="submit" value="Submit/Blank">
+          <form id="js-upam-aside--nav--grid-size--size-picker">
+            <label class="label">Grid Height:<br>
+              <input id="js-upam-aside--nav--grid-size--input---height" type="number" name="height" min="1" max="40" step="1" value="15" required class="upam-aside--nav--grid-size--number">
+            </label>
+            <label class="label">Grid Height:<br>
+              <input id="js-upam-aside--nav--grid-size--input---width" type="number" name="height" min="1" max="48" step="1" value="15" required class="upam-aside--nav--grid-size--number">
+            </label>
+            <input type="submit" value="Submit/Blank" class="upam-aside--nav--grid-size--btn">
           </form>
         </section>
-
         <hr>
-
-        <!-- Aside Nav color picker -->
+        <!-- Aside nav color picker -->
         <section class="upam-aside--nav--color-picker">
           <h2 class="upam-aside--nav--color-picker--title">Color</h2>
-          <input id="js-main-nav-color-picker-input" class="upam-aside--nav--color-picker--input" type="color" value="#FFFFFF">
-          <p id="js-main-nav-color-picker-rgb" class="upam-aside--nav--color-picker--display"></p>
-          <p id="js-main-nav-color-picker-hex" class="upam-aside--nav--color-picker--display"></p>
+          <input id="js-upam-aside--nav--color-picker--input---color" type="color" value="#FFFFFF" class="upam-aside--nav--color-picker--input">
+          <p id="js-upam-aside--nav--color-picker--display---rgb" class="upam-aside--nav--color-picker--display"></p>
+          <p id="js-upam-aside--nav--color-picker--display---hex" class="upam-aside--nav--color-picker--display"></p>
         </section>
-
         <hr>
-
+        <!-- Aside nav tool -->
         <section class="upam-aside--nav--tool">
-          <label class="upam-label">Paint<input id="js-main-nav-tool-paint" type="radio" name="tool" checked></label>
-          <label class="upam-label">Dipper<input id="js-main-nav-tool-dipper" type="radio" name="tool"></label>
-          <label class="upam-label">Erase<input id="js-main-nav-tool-eraser" type="radio" name="tool"></label>
-          <label class="upam-label">None<input id="js-main-nav-tool-none" type="radio" name="tool"></label>
+          <label class="upam-label">Paint
+            <input id="js-upam-aside--nav--tool--input---paint" type="radio" name="tool" checked>
+          </label>
+          <label class="upam-label">Dipper
+            <input id="js-upam-aside--nav--tool--input---dipper" type="radio" name="tool">
+          </label>
+          <label class="upam-label">Erase
+            <input id="js-upam-aside--nav--tool--input---erase" type="radio" name="tool">
+          </label>
+          <label class="upam-label">None
+            <input id="js-upam-aside--nav--tool--input---none" type="radio" name="tool">
+          </label>
         </section>
-
         <hr>
-
+        <!-- Aside nav emoji picker -->
         <section class="upam-aside--nav--emoji-picker">
-          <h2 class="aside-nav-emoji-picker-title">Emoji</h2>
-          <div class="aside-nav-emoji-picker-container">
-            <label class="upam-label">None<input id="js-main-nav-emoji-picker-none" type="radio" name="upam-emoji" value="none" checked></label>
-            <label class="upam-label">Erase<input id="js-main-nav-emoji-picker-erase" type="radio" name="upam-emoji" value="erase"></label>
-            <label class="upam-label">😊<input id="js-main-nav-emoji-picker-smile" type="radio" name="upam-emoji" value="😊"></label>
-            <label class="upam-label">😁<input id="js-main-nav-emoji-picker-grin" type="radio" name="upam-emoji" value="😁"></label>
-            <label class="upam-label">😂<input id="js-main-nav-emoji-picker-tears" type="radio" name="upam-emoji" value="😂"></label>
+          <h2 class="upam-aside--nav--emoji-picker--title">Emoji</h2>
+          <div class="upam-aside--nav--emoji-picker--container">
+            <label class="upam-label">None
+              <input id="js-upam-aside--nav--emoji-picker--input---none" type="radio" name="upam-emoji" value="none" checked>
+            </label>
+            <label class="upam-label">Erase
+              <input id="js-upam-aside--nav--emoji-picker--input---erase" type="radio" name="upam-emoji" value="erase">
+            </label>
+            <label class="upam-label">😊
+              <input id="js-upam-aside--nav--emoji-picker--input---smile" type="radio" name="upam-emoji" value="😊">
+            </label>
+            <label class="upam-label">😁
+              <input id="js-upam-aside--nav--emoji-picker--input---grin" type="radio" name="upam-emoji" value="😁">
+            </label>
+            <label class="upam-label">😂
+              <input id="js-upam-aside--nav--emoji-picker--input---tears" type="radio" name="upam-emoji" value="😂">
+            </label>
           </div>
         </section>
-      </nav>
-    </aside>
-
-    <!-- Main Canvas for drawing -->
-    <main class="upam-canvas">
-      <h2 class="upam-canvas--title">Design Canvas</h2>
-      <table id="js-upam-canvas--table"></table>
-    </main><!-- Main closer -->
-  </div><!-- .flex-container closer -->
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="script/designs.js"></script>
-</body>
+      </aside>
+      <!-- Main canvas for drawing -->
+      <main class="upam-canvas">
+        <h2 class="upam-canvas--title">Design Canvas</h2>
+        <table id="js-upam-canvas--table"></table>
+      </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="script/designs.js"></script>
+  </body>
 </html>
